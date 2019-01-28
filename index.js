@@ -14,6 +14,12 @@ server = app.listen(3000);
 
 const io = require('socket.io')(server);
 
-io.on('connection', (scoket) => {
+io.on('connection', (socket) => {
 	console.log('New user connected');
+
+	socket.username = "Anonymous";
+
+	socket.on('change_username', (data) => {
+		socket.username = data.username;
+	});
 });
