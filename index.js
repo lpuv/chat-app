@@ -22,4 +22,9 @@ io.on('connection', (socket) => {
 	socket.on('change_username', (data) => {
 		socket.username = data.username;
 	});
+
+	socket.on('new_message', (data) => {
+		//Broadcast the message
+		io.sockets.emit('new_message', {message : data.message, username : socket.username});
+	});
 });
